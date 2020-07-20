@@ -5,7 +5,7 @@ export default class Filtering extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            perPage: 8,
+            perPage: 20,
         }
     }
 

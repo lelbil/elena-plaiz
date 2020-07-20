@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import {Card,
-    CardHeader,
-    CardMedia,
-} from '@material-ui/core'
+import { Card, CardMedia } from '@material-ui/core'
 
 class Posts extends Component {
     constructor(props) {
@@ -11,6 +8,10 @@ class Posts extends Component {
         this.state = {
             data: []
         }
+    }
+
+    componentDidMount() {
+        this.setState({ data: this.props.data })
     }
 
     componentDidUpdate = () => {
@@ -22,7 +23,7 @@ class Posts extends Component {
             <div style={styles.container}>
                 {
                     this.state.data.map(post =>
-                        <Card key={post.id || post._id} style={styles.card} elevation={24}>
+                        <Card onClick={() => this.props.showPost(post.id || post._id, post.user.fb_id)} key={post.id || post._id} style={styles.card} elevation={24}>
                             <CardMedia
                                 image={'http://35.181.29.44:9000/images/' + post.picture}
                                 title={post.description}
