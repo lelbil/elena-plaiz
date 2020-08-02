@@ -4,6 +4,7 @@ import PostDashboard from './PostDashboard'
 import Posts from './Posts'
 import Paging from './Paging'
 import Filtering from './Filtering'
+import { TextField } from "@material-ui/core"
 
 const getQueryParamsFromFilters = filters => {
     let str = ''
@@ -15,10 +16,13 @@ const getQueryParamsFromFilters = filters => {
     return str
 }
 
+let searchTimeout
 function App() {
     const [perPage, setPerPage] = useState(20)
     const [currentPage, setCurrentPage] = useState(1)
     const [filters, setFilters] = useState({})
+    const [search, setSearch] = useState('')
+    const [searchQuery, setSearchQuery] = useState('')
     const [data, setData] = useState([])
     const [pageCount, setPageCount] = useState(1)
     const [postToShow, setPostToShow] = useState(null)
@@ -30,10 +34,10 @@ function App() {
 
     useEffect(() => {
         fetchPosts()
-    }, [ perPage, currentPage, filters ])
+    }, [ perPage, currentPage, filters, searchQuery ])
 
     const fetchPosts = () => {
-        fetch(`http://localhost:9000/api/posts/elena?page=${currentPage}&perPage=${perPage}${getQueryParamsFromFilters(filters)}`, {
+        fetch(`http://35.181.29.44:9000/api/posts/elena?searchquery=${search}&page=${currentPage}&perPage=${perPage}${getQueryParamsFromFilters(filters)}`, {
             method: 'GET',
             headers: {
                 Accept: "application/json",
@@ -64,12 +68,20 @@ function App() {
         setPostToShowUser(null)
     }
 
+    const onSearchChanged = ev => {
+        const { value } = ev.target
+        clearTimeout(searchTimeout)
+        searchTimeout = setTimeout(() => { setCurrentPage(1); setSearchQuery(value) }, 500)
+        setSearch(value)
+    }
+
     return (
         <div className="App">
             {postToShow ?
                 <PostDashboard id={postToShow} user={postToShowUser} goBack={showHome}/>
                 : <React.Fragment>
                     <Filtering perPage={perPage} changePerPage={changePerPage} changeFilters={setFilters}/>
+                    <TextField label={'Search in description'} value={search} onChange={onSearchChanged}/>
                     <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>
                     <Posts data={data} showPost={showPost}/>
                     <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>
