@@ -5,9 +5,20 @@ import Posts from './Posts'
 import Paging from './Paging'
 import Filtering from './Filtering'
 
+const getQueryParamsFromFilters = filters => {
+    let str = ''
+    for (let key in filters) {
+        if (filters.hasOwnProperty(key)) {
+            str += `&${key}=${filters[key]}`
+        }
+    }
+    return str
+}
+
 function App() {
     const [perPage, setPerPage] = useState(20)
     const [currentPage, setCurrentPage] = useState(1)
+    const [filters, setFilters] = useState({})
     const [data, setData] = useState([])
     const [pageCount, setPageCount] = useState(1)
     const [postToShow, setPostToShow] = useState(null)
@@ -19,15 +30,14 @@ function App() {
 
     useEffect(() => {
         fetchPosts()
-    }, [ perPage, currentPage ])
+    }, [ perPage, currentPage, filters ])
 
     const fetchPosts = () => {
-        fetch(`http://35.181.29.44:9000/api/posts/all?page=${currentPage}&perPage=${perPage}`, {
+        fetch(`http://localhost:9000/api/posts/elena?page=${currentPage}&perPage=${perPage}${getQueryParamsFromFilters(filters)}`, {
             method: 'GET',
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
-                // TODO: make sure the Authorization is for an admin to get juvenile and shadowbanned (ideally create a new admin)
                 Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJQbGFpeiIsInN1YiI6IjVjZmU0YzA2ZGU2OGJhNjg4MjY0NzVkMSIsImlhdCI6MTU5Mzg3MDIyNzUzMSwiZXhwIjoxNTkzOTU2NjI3NTMxfQ.T9I87aqed0Oy5ckgba0veV3NLnZeUzPpGAli_hqZW9k'
             }
         }).then(res => res.json()).then(result => {
@@ -59,7 +69,7 @@ function App() {
             {postToShow ?
                 <PostDashboard id={postToShow} user={postToShowUser} goBack={showHome}/>
                 : <React.Fragment>
-                    <Filtering perPage={perPage} changePerPage={changePerPage}/>
+                    <Filtering perPage={perPage} changePerPage={changePerPage} changeFilters={setFilters}/>
                     <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>
                     <Posts data={data} showPost={showPost}/>
                     <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>

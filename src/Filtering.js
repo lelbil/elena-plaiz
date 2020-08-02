@@ -1,11 +1,17 @@
 import React, {Component} from 'react';
-import {FormControlLabel, FormControl, FormLabel, RadioGroup, Radio} from "@material-ui/core"
+import {FormControlLabel, FormControl, FormLabel, RadioGroup, Radio, Checkbox} from "@material-ui/core"
 
 export default class Filtering extends Component {
     constructor(props) {
         super(props)
         this.state = {
             perPage: 20,
+            shadowban: true,
+            shadowbanF: true,
+            juvenile: true,
+            juvenileF: true,
+            moodboard: false,
+            moodboardF: true,
         }
     }
 
@@ -13,6 +19,18 @@ export default class Filtering extends Component {
         if (this.props.perPage !== this.state.perPage) this.setState({perPage: this.props.perPage})
     }
 
+    onChange = ev => {
+        this.setState({ ...this.state, [ev.target.name]: ev.target.checked}, () => {
+            this.props.changeFilters({
+                shadowban: this.state.shadowban,
+                shadowbanF: this.state.shadowbanF,
+                juvenile: this.state.juvenile,
+                juvenileF: this.state.juvenileF,
+                moodboard: this.state.moodboard,
+                moodboardF: this.state.moodboardF,
+            })
+        })
+    }
 
     render() {
         return (
@@ -29,6 +47,12 @@ export default class Filtering extends Component {
                         <FormControlLabel value={50} control={<Radio />} label="50" />
                         <FormControlLabel value={100} control={<Radio />} label="100" />
                     </RadioGroup>
+                    <FormControlLabel control={<Checkbox onChange={this.onChange} checked={this.state.shadowban} name={'shadowban'}/>} label="Shadowbanned" />
+                    <FormControlLabel control={<Checkbox onChange={this.onChange} checked={this.state.shadowbanF} name={'shadowbanF'}/>} label="Not shadowbanned" />
+                    <FormControlLabel control={<Checkbox onChange={this.onChange} checked={this.state.juvenile} name={'juvenile'}/>} label="Juvenile" />
+                    <FormControlLabel control={<Checkbox onChange={this.onChange} checked={this.state.juvenileF} name={'juvenileF'}/>} label="Not Juvenile" />
+                    <FormControlLabel control={<Checkbox onChange={this.onChange} checked={this.state.moodboardF} name={'moodboardF'}/>} label="Not Moodboard" />
+                    <FormControlLabel control={<Checkbox onChange={this.onChange} checked={this.state.moodboard} name={'moodboard'}/>} label="Moodboard" />
                 </FormControl>
 
             </div>
