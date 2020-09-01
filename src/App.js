@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PostDashboard from './PostDashboard'
 import Posts from './Posts'
 import Paging from './Paging'
@@ -17,7 +18,7 @@ const getQueryParamsFromFilters = filters => {
 }
 
 let searchTimeout
-function App() {
+function Home() {
     const [perPage, setPerPage] = useState(20)
     const [currentPage, setCurrentPage] = useState(1)
     const [filters, setFilters] = useState({})
@@ -25,8 +26,6 @@ function App() {
     const [searchQuery, setSearchQuery] = useState('')
     const [data, setData] = useState([])
     const [pageCount, setPageCount] = useState(1)
-    const [postToShow, setPostToShow] = useState(null)
-    const [postToShowUser, setPostToShowUser] = useState(null)
 
     useEffect(() => {
         fetchPosts()
@@ -58,16 +57,6 @@ function App() {
         setCurrentPage(1)
     }
 
-    const showPost = (postId, userId) => {
-        setPostToShow(postId)
-        setPostToShowUser(userId)
-    }
-
-    const showHome = () => {
-        setPostToShow(null)
-        setPostToShowUser(null)
-    }
-
     const onSearchChanged = ev => {
         const { value } = ev.target
         clearTimeout(searchTimeout)
@@ -77,18 +66,26 @@ function App() {
 
     return (
         <div className="App">
-            {postToShow ?
-                <PostDashboard id={postToShow} user={postToShowUser} goBack={showHome}/>
-                : <React.Fragment>
-                    <Filtering perPage={perPage} changePerPage={changePerPage} changeFilters={setFilters}/>
-                    <TextField label={'Search in description'} value={search} onChange={onSearchChanged}/>
-                    <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>
-                    <Posts data={data} showPost={showPost}/>
-                    <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>
-                </React.Fragment>
-            }
+            <Filtering perPage={perPage} changePerPage={changePerPage} changeFilters={setFilters}/>
+            <TextField label={'Search in description'} value={search} onChange={onSearchChanged}/>
+            <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>
+            <Posts data={data}/>
+            <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>
         </div>
     );
 }
 
-export default App;
+export default function App() {
+    return (
+        <Router>
+            <Switch>
+                <Route path="/post/:postId">
+                    <PostDashboard />
+                </Route>
+                <Route path="/">
+                    <Home />
+                </Route>
+            </Switch>
+        </Router>
+    );
+}

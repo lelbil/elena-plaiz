@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
+import { withRouter, Link } from 'react-router-dom'
 
-export default class PostDashboard extends Component {
+class PostDashboard extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -10,12 +11,11 @@ export default class PostDashboard extends Component {
     }
 
     componentDidMount = () => {
-        this.fetchPost()
-        this.fetchUser()
+        this.fetchPost(this.fetchUser)
     }
 
-    fetchPost = () => {
-        fetch(`http://35.181.29.44:9000/api/posts/${this.props.id}`, {
+    fetchPost = (cb) => {
+        fetch(`http://35.181.29.44:9000/api/posts/${this.props.match.params.postId}`, {
             method: 'GET',
             headers: {
                 Accept: "application/json",
@@ -26,14 +26,14 @@ export default class PostDashboard extends Component {
         }).then(res => res.json()).then(post => {
             this.setState({
                 post
-            })
+            }, cb)
         })
             .catch(error => {
                 console.warn('There was an error while trying to get posts: ', error)
             })
     }
     fetchUser = () => {
-        fetch(`http://35.181.29.44:9000/api/users/${this.props.user}`, {
+        fetch(`http://35.181.29.44:9000/api/users/${this.state.post.user}`, {
             method: 'GET',
             headers: {
                 Accept: "application/json",
@@ -59,7 +59,7 @@ export default class PostDashboard extends Component {
                 {!post ? <span>Loading...</span> :
                     <div style={styles.container}>
                         <div>
-                            <button onClick={this.props.goBack}>Home</button>
+                            <Link to={"/"}><button>Home</button></Link>
                             <img
                                 style={styles.picture}
                                 src={'http://35.181.29.44:9000/images/' + post.picture}
@@ -120,6 +120,8 @@ export default class PostDashboard extends Component {
 
     }
 }
+
+export default withRouter(PostDashboard)
 
 const styles = {
     container: {

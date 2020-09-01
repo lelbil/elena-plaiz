@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 import { Card, CardMedia } from '@material-ui/core'
 
@@ -22,15 +23,15 @@ class Posts extends Component {
         return (
             <div style={styles.container}>
                 {
-                    this.state.data.map(post =>
-                        <Card onClick={() => this.props.showPost(post.id || post._id, post.user.fb_id)} key={post.id || post._id} style={styles.card} elevation={24}>
+                    this.state.data.map(post => <Link to={'/post/' + post.id || post._id}>
+                        <Card key={post.id || post._id} style={styles.card} elevation={24}>
                             <CardMedia
                                 image={'http://35.181.29.44:9000/images/' + post.picture}
                                 title={post.description}
                                 style={styles.media}
                             />
                         </Card>
-                    )
+                    </Link>)
                 }
             </div>
         );
