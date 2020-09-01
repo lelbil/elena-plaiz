@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import PostDashboard from './PostDashboard'
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Users from "./Users";
 import Posts from './Posts'
+import PostDashboard from './PostDashboard'
+import UserView from "./UserView";
 import Paging from './Paging'
 import Filtering from './Filtering'
 import { TextField } from "@material-ui/core"
-import UserView from "./UserView";
 
 const getQueryParamsFromFilters = filters => {
     let str = ''
@@ -68,6 +69,7 @@ function Home() {
     return (
         <div className="App">
             <Filtering perPage={perPage} changePerPage={changePerPage} changeFilters={setFilters}/>
+            <Link to={"/users"}><h3>Users View</h3></Link>
             <TextField label={'Search in description'} value={search} onChange={onSearchChanged}/>
             <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>
             <Posts data={data}/>
@@ -80,6 +82,9 @@ export default function App() {
     return (
         <Router>
             <Switch>
+                <Route path="/users">
+                    <Users />
+                </Route>
                 <Route path="/user/:userId">
                     <UserView />
                 </Route>
