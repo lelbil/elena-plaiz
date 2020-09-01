@@ -6,6 +6,7 @@ import Posts from './Posts'
 import Paging from './Paging'
 import Filtering from './Filtering'
 import { TextField } from "@material-ui/core"
+import UserView from "./UserView";
 
 const getQueryParamsFromFilters = filters => {
     let str = ''
@@ -79,6 +80,9 @@ export default function App() {
     return (
         <Router>
             <Switch>
+                <Route path="/user/:userId">
+                    <UserView />
+                </Route>
                 <Route path="/post/:postId">
                     <PostDashboard />
                 </Route>

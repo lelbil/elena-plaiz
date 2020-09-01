@@ -95,8 +95,8 @@ class PostDashboard extends Component {
                         </div>
                         { !!user && <div style={styles.userInfo}>
                             <div>
-                                <h1>{ user.username || user.name }</h1>
-                                <img src={user.profile_pic} style={{height: 250}}/>
+                                <Link to={'/user/' + user.fb_id}><h1>{ user.username || user.name }</h1>
+                                <img src={user.profile_pic} style={{height: 250}}/></Link>
                                 <ul>
                                     {['id', 'fb_id', 'expoPushToken', 'username', 'name', 'bio', 'email', 'tel', 'register_date', 'yearOfBirth', 'origin'].map(info => (
                                         <li key={info}>{info} : {user[info]}</li>
