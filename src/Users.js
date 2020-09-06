@@ -44,7 +44,7 @@ class Users extends Component {
     render() {
         return (
             <div style={styles.bigContainer}>
-                <Link to={"/"}><button>Home</button></Link>
+                <Link to={"/plaizadmin"}><button>Home</button></Link>
                 <TextField label={'Search'} value={this.state.searchQuery} onChange={this.onSearchChanged}/>
                 <div style={styles.container}>
                     {

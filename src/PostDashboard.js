@@ -59,7 +59,7 @@ class PostDashboard extends Component {
                 {!post ? <span>Loading...</span> :
                     <div style={styles.container}>
                         <div>
-                            <Link to={"/"}><button>Home</button></Link>
+                            <Link to={"/plaizadmin"}><button>Home</button></Link>
                             <img
                                 style={styles.picture}
                                 src={'http://35.181.29.44:9000/images/' + post.picture}

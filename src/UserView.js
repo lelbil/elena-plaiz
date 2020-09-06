@@ -71,7 +71,7 @@ class UserView extends Component {
             <div>
                 {!user ? <span>Loading...</span> :
                     <div style={styles.container}>
-                        <Link to={"/"}><button>Home</button></Link>
+                        <Link to={"/plaizadmin"}><button>Home</button></Link>
                         <Link to={"/users"}><button>Users</button></Link>
                         { !!posts && <div style={{ flexDirection: 'row' }}>
                             <RadioGroup row aria-label="Show" name="mode" value={this.state.showPostsMode} onChange={this.changeMode}>
