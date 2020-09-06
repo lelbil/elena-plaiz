@@ -8,6 +8,8 @@ import UserView from "./UserView";
 import Paging from './Paging'
 import Filtering from './Filtering'
 import {Card, CardMedia, TextField} from "@material-ui/core"
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css';
 
 const getQueryParamsFromFilters = filters => {
     let str = ''
@@ -84,6 +86,7 @@ function BrandHome() {
     const [searchQuery, setSearchQuery] = useState('')
     const [data, setData] = useState([])
     const [pageCount, setPageCount] = useState(1)
+    const [sliderIndex, setSliderIndex] = useState(null)
 
     useEffect(() => {
         fetchPosts()
@@ -118,13 +121,14 @@ function BrandHome() {
         setSearch(value)
     }
 
+    const images = data.map(post => 'https://plaizoriginal.s3.eu-west-3.amazonaws.com/' + post.picture)
     return (
         <div className="App">
             <TextField label={'Search in description'} value={search} onChange={onSearchChanged}/>
             <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>
             <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start'}}>
                 {
-                    data.map(post => <Card key={post.id || post._id} style={{width: 300, margin: 20,flexBasis: '20%'}} elevation={24}>
+                    data.map((post, index) => <Card onClick={() => setSliderIndex(index)} key={post.id || post._id} style={{width: 300, margin: 20,flexBasis: '20%'}} elevation={24}>
                         <CardMedia
                             image={'http://35.181.29.44:9000/images/' + post.picture}
                             title={post.description}
@@ -133,6 +137,14 @@ function BrandHome() {
                     </Card>)
                 }
             </div>
+            { sliderIndex && <Lightbox
+                mainSrc={images[sliderIndex]}
+                nextSrc={images[(sliderIndex + 1) % images.length]}
+                prevSrc={images[(sliderIndex + images.length - 1) % images.length]}
+                onCloseRequest={() => setSliderIndex(null)}
+                onMovePrevRequest={() => setSliderIndex((sliderIndex - 1) % images.length )}
+                onMoveNextRequest={() => setSliderIndex((sliderIndex + 1) % images.length )}
+            />}
             <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>
         </div>
     );
