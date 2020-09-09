@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 import {Card, CardMedia, FormControlLabel, FormLabel, Radio, RadioGroup} from '@material-ui/core'
+import Lightbox from "react-image-lightbox";
 
 const lastXDaysOptions = [ '3', '7', '30', '356' ]
 
@@ -11,6 +12,7 @@ class Top10 extends Component {
         this.state = {
             data: [],
             lastXDays: '3',
+            sliderIndex: null,
         }
     }
 
@@ -43,6 +45,8 @@ class Top10 extends Component {
     }
 
     render() {
+        const images = this.state.data.map(post => 'https://plaizoriginal.s3.eu-west-3.amazonaws.com/' + post.picture)
+        const { sliderIndex } = this.state
         return (
             <div>
                 <RadioGroup row aria-label="Show top 10 from last x days: " name="Show top 10 from last x days: " value={this.state.lastXDays} onChange={this.changeLastXDays}>
@@ -51,8 +55,8 @@ class Top10 extends Component {
                 </RadioGroup>
                 <div style={styles.container}>
                     {
-                        this.state.data.map(post => <Link to={'/post/' + post.id || post._id}>
-                            <Card key={post.id || post._id} style={styles.card} elevation={24}>
+                        this.state.data.map((post, sliderIndex) => <Link>
+                            <Card onClick={() => this.setState({ sliderIndex })} key={post.id || post._id} style={styles.card} elevation={24}>
                                 <CardMedia
                                     image={'http://35.181.29.44:9000/images/' + post.picture}
                                     title={post.description}
@@ -62,6 +66,14 @@ class Top10 extends Component {
                         </Link>)
                     }
                 </div>
+                { this.state.sliderIndex && <Lightbox
+                    mainSrc={images[sliderIndex]}
+                    nextSrc={images[(sliderIndex + 1) % images.length]}
+                    prevSrc={images[(sliderIndex + images.length - 1) % images.length]}
+                    onCloseRequest={() => this.setState({ sliderIndex: null })}
+                    onMovePrevRequest={() => this.setState({ sliderIndex: (sliderIndex - 1) % images.length })}
+                    onMoveNextRequest={() => this.setState({ sliderIndex: (sliderIndex + 1) % images.length })}
+                />}
             </div>
 
         );
