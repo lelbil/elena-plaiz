@@ -6,6 +6,7 @@ import Posts from './Posts'
 import PostDashboard from './PostDashboard'
 import UserView from "./UserView";
 import Paging from './Paging'
+import Top10 from "./Top10";
 import Filtering from './Filtering'
 import {Card, CardMedia, TextField} from "@material-ui/core"
 import Lightbox from 'react-image-lightbox';
@@ -165,6 +166,9 @@ export default function App() {
                 </Route>
                 <Route path="/plaizadmin">
                     <Home />
+                </Route>
+                <Route path="/top10">
+                    <Top10 />
                 </Route>
                 <Route path="/">
                     <BrandHome />
