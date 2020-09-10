@@ -9,23 +9,24 @@
   pointer-events: none;
 }
 
+.LogosHeader{
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
 .Logo {
   height: 40px;
-  position: absolute;
-  left: 20px;
 }
 
 .X {
-  position: absolute;
   color: white;
-  left: 55px;
 }
 
 .LogoDcm {
   height: 40px;
-  position: absolute;
-  left: 72px;
-  top: 27px
+  padding-left: 10px
 }
 
 @media (prefers-reduced-motion: no-preference) {

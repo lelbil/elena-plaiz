@@ -128,9 +128,11 @@ function BrandHome() {
     const images = data.map(post => 'https://plaizoriginal.s3.eu-west-3.amazonaws.com/' + post.picture)
     return (
         <div className="App">
-            <img src={logo} alt="Logo" className="Logo"/>
-            <p className="X">x</p>
-            <img src={logoDcm} alt="LogoDcm" className="LogoDcm"/>
+            <div className="LogosHeader">
+                <img src={logo} alt="Logo" className="Logo"/>
+                <p className="X">x</p>
+                <img src={logoDcm} alt="LogoDcm" className="LogoDcm"/>
+            </div>
             <TextField label={'Search in description'} value={search} onChange={onSearchChanged}/>
             <SearchBar/>
             <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>

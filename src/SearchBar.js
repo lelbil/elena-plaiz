@@ -15,10 +15,10 @@ import { green, purple, pink } from '@material-ui/core/colors';
 const CssTextField = withStyles({
     root: {
         '& label.Mui-focused': {
-            color: '#7D4ECE',
+            color: '#733689',
         },
         '& .MuiInput-underline:after': {
-            borderBottomColor: '#7D4ECE',
+            borderBottomColor: '#733689',
         },
         '& .MuiInput-underline:before': {
             borderBottomColor: '#535274',

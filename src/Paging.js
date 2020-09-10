@@ -74,16 +74,19 @@ const styles = {
         position: 'relative',
         display: 'block',
         padding: '.5rem .75rem',
-        marginLeft: '-1px',
+        margin: '5px',
         lineHeight: '1.25',
         cursor: 'pointer',
-        border: 'solid 1px #535274',
-        backgroundColor: "#292952",
+        border: 'solid 1px #444565',
+        backgroundColor: "#313456",
         color:"white",
         borderRadius: 5
     },
     selectedLi: {
-        backgroundColor: '#4452A7',
+        backgroundColor: '#733689',
+        color:"white",
+        fontWeight:"bold",
+        border: 'solid 1px #733689'
     },
     disabledLi: {
         cursor: 'not-allowed',
