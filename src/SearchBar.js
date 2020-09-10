@@ -33,6 +33,7 @@ const CssTextField = withStyles({
     },
     input: {
         color: 'white',
+        width: '40vw',
     },
     inputLabel:{
         color:'#535274',

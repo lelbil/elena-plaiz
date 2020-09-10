@@ -134,8 +134,10 @@ function BrandHome() {
                 <img src={logoDcm} alt="LogoDcm" className="LogoDcm"/>
             </div>
             <TextField label={'Search in description'} value={search} onChange={onSearchChanged}/>
+            <div style={{display: 'flex', flexDirection: 'row', justifyContent: "space-between"}}>
             <SearchBar/>
             <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>
+            </div>
             <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start'}}>
                 {
                     data.map((post, index) => <Card onClick={() => setSliderIndex(index)} key={post.id || post._id} style={{width: 300, margin: 20,flexBasis: '20%'}} elevation={24}>
