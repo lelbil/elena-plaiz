@@ -80,13 +80,15 @@ const styles = {
         border: 'solid 1px #444565',
         backgroundColor: "#313456",
         color:"white",
-        borderRadius: 5
+        borderRadius: 5,
+        minWidth: "15px",
+        textAlign: "center"
     },
     selectedLi: {
-        backgroundColor: '#733689',
+        background: 'linear-gradient(120deg, #532453 30%, #894ECF 90%)',
         color:"white",
         fontWeight:"bold",
-        border: 'solid 1px #733689'
+        border: 'solid 0px #733689'
     },
     disabledLi: {
         cursor: 'not-allowed',
