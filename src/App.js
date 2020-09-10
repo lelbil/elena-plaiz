@@ -7,6 +7,7 @@ import PostDashboard from './PostDashboard'
 import UserView from "./UserView";
 import Paging from './Paging'
 import Filtering from './Filtering'
+import SearchBar from './SearchBar'
 import {Card, CardMedia, TextField} from "@material-ui/core"
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
@@ -131,6 +132,7 @@ function BrandHome() {
             <p className="X">x</p>
             <img src={logoDcm} alt="LogoDcm" className="LogoDcm"/>
             <TextField label={'Search in description'} value={search} onChange={onSearchChanged}/>
+            <SearchBar/>
             <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>
             <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start'}}>
                 {
