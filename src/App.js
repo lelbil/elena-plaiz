@@ -133,10 +133,9 @@ function BrandHome() {
                 <p className="X">x</p>
                 <img src={logoDcm} alt="LogoDcm" className="LogoDcm"/>
             </div>
-            <TextField label={'Search in description'} value={search} onChange={onSearchChanged}/>
             <div style={{display: 'flex', flexDirection: 'row', justifyContent: "space-between"}}>
-            <SearchBar/>
-            <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>
+                <SearchBar label={'Search'} value={search} onChange={onSearchChanged}/>
+                <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>
             </div>
             <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start'}}>
                 {

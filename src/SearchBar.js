@@ -40,13 +40,15 @@ const CssTextField = withStyles({
     }
   }));
   
-  export default function SearchBar() {
+  export default function SearchBar(props) {
     const classes = useStyles();
   
     return (
         <CssTextField
             id="custom-css-standard-input"
-            label="Search in description"
+            label={props.label || "Search"}
+            value={props.value}
+            onChange={props.onChange}
             InputProps={{className:classes.input}}
             InputLabelProps={{className:classes.inputLabel}}
         />
