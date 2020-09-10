@@ -10,6 +10,9 @@ import Filtering from './Filtering'
 import {Card, CardMedia, TextField} from "@material-ui/core"
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
+import logo from './assets/logo-test.png';
+import logoDcm from './assets/logo-dcm-alt.png';
+
 
 const getQueryParamsFromFilters = filters => {
     let str = ''
@@ -73,7 +76,7 @@ function Home() {
             <Filtering perPage={perPage} changePerPage={changePerPage} changeFilters={setFilters}/>
             <Link to={"/users"}><h3>Users View</h3></Link>
             <TextField label={'Search in description'} value={search} onChange={onSearchChanged}/>
-            <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>
+            <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage} className="Paging"/>
             <Posts data={data}/>
             <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>
         </div>
@@ -124,6 +127,9 @@ function BrandHome() {
     const images = data.map(post => 'https://plaizoriginal.s3.eu-west-3.amazonaws.com/' + post.picture)
     return (
         <div className="App">
+            <img src={logo} alt="Logo" className="Logo"/>
+            <p className="X">x</p>
+            <img src={logoDcm} alt="LogoDcm" className="LogoDcm"/>
             <TextField label={'Search in description'} value={search} onChange={onSearchChanged}/>
             <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>
             <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start'}}>
@@ -132,7 +138,7 @@ function BrandHome() {
                         <CardMedia
                             image={'http://35.181.29.44:9000/images/' + post.picture}
                             title={post.description}
-                            style={{ height: 400 }}
+                            style={{ height: 400, backgroundColor:"#292952" }}
                         />
                     </Card>)
                 }

@@ -77,11 +77,13 @@ const styles = {
         marginLeft: '-1px',
         lineHeight: '1.25',
         cursor: 'pointer',
-        border: 'solid 1px black',
+        border: 'solid 1px #535274',
+        backgroundColor: "#292952",
+        color:"white",
         borderRadius: 5
     },
     selectedLi: {
-        backgroundColor: '#2b7af4',
+        backgroundColor: '#4452A7',
     },
     disabledLi: {
         cursor: 'not-allowed',
