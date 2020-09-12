@@ -16,13 +16,16 @@ const CssTextField = withStyles({
         '& .MuiInput-underline:before': {
             borderBottomColor: '#535274',
         },
+        '& .MuiInput-underline:hover:before': {
+            borderBottomColor: '#535274',
+        },
     },
-  })(TextField);
+})(TextField);
   
-  const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
     root: {
-      display: 'flex',
-      flexWrap: 'wrap',
+        display: 'flex',
+        flexWrap: 'wrap',
     },
     input: {
         color: 'white',
@@ -31,9 +34,9 @@ const CssTextField = withStyles({
     inputLabel:{
         color:'#535274',
     }
-  }));
+}));
   
-  export default function SearchBar(props) {
+export default function SearchBar(props) {
     const classes = useStyles();
   
     return (

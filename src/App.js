@@ -139,7 +139,7 @@ function BrandHome() {
             </div>
             <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start'}}>
                 {
-                    data.map((post, index) => <Card onClick={() => setSliderIndex(index)} key={post.id || post._id} style={{width: 300, margin: 20,flexBasis: '20%'}} elevation={24}>
+                    data.map((post, index) => <Card onClick={() => setSliderIndex(index)} key={post.id || post._id} style={{width: 300, margin: 20,flexBasis: '20%', cursor:"pointer"}} elevation={24}>
                         <CardMedia
                             image={'http://35.181.29.44:9000/images/' + post.picture}
                             title={post.description}
