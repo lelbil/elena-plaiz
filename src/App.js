@@ -139,11 +139,11 @@ function BrandHome() {
             </div>
             <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start'}}>
                 {
-                    data.map((post, index) => <Card onClick={() => setSliderIndex(index)} key={post.id || post._id} style={{width: 300, margin: 20,flexBasis: '20%', cursor:"pointer"}} elevation={24}>
+                    data.map((post, index) => <Card onClick={() => setSliderIndex(index)} key={post.id || post._id} style={{width: 300, margin: 20,flexBasis: '20%', cursor:"pointer", backgroundColor:"transparent", backgroundImage: "url(https://i.ibb.co/PQdcWpc/lock4.png)"}} elevation={24}>
                         <CardMedia
                             image={'http://35.181.29.44:9000/images/' + post.picture}
                             title={post.description}
-                            style={{ height: 400, backgroundColor:"#292952" }}
+                            style={{ height: 400, backgroundColor:"transparent" }}
                         />
                     </Card>)
                 }
