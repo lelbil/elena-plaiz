@@ -13,6 +13,10 @@ import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import logo from './assets/logo-test.png';
 import logoDcm from './assets/logo-dcm-alt.png';
+import NellyRodi from './assets/NellyRodi.png';
+import Peclers from './assets/Peclers.png';
+import Promostyl from './assets/Promostyl.png';
+import Launchmetrics from './assets/Launchmetrics.png';
 
 
 const getQueryParamsFromFilters = filters => {
@@ -132,6 +136,7 @@ function BrandHome() {
                 <img src={logo} alt="Logo" className="Logo"/>
                 <p className="X">x</p>
                 <img src={logoDcm} alt="LogoDcm" className="LogoDcm"/>
+                {/* <img src={Launchmetrics} alt="LogoDcm" className="LogoDcm" style={{width:150, height:89, paddingTop:15}}/> */}
             </div>
             <div style={{display: 'flex', flexDirection: 'row', justifyContent: "space-between"}}>
                 <SearchBar label={'Search'} value={search} onChange={onSearchChanged}/>
