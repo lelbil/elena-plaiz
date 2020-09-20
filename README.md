@@ -61,7 +61,14 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/ad
 
 ### Deployment
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+If this is the first time deploying, you'd need to install and configure awscli:
+
+1. Run `brew install awscli`
+2. Download `credentials.csv` for the IAM user used for deployment
+3. Run `aws configure` and configure it using the information from the downloaded .csv file
+
+When the previous steps are done:
+4. run `yarn build && yarn deploy`
 
 ### `yarn build` fails to minify
 
