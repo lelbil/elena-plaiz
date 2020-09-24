@@ -143,7 +143,7 @@ function BrandHome() {
                 <SearchBar label={'Search'} value={search} onChange={onSearchChanged}/>
                 <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>
             </div>
-            <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start'}}>
+            <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around'}}>
                 {
                     data.map((post, index) => <Card onClick={() => setSliderIndex(index)} key={post.id || post._id} style={{width: 300, margin: 20,flexBasis: '20%', cursor:"pointer", backgroundColor:"transparent", backgroundImage: "url(https://i.ibb.co/PQdcWpc/lock4.png)"}} elevation={24}>
                         <CardMedia

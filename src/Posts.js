@@ -42,7 +42,7 @@ const styles = {
     container: {
         display: 'flex',
         flexWrap: 'wrap',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-around',
     },
     card: {
         width: 300,
