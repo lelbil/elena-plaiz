@@ -30,23 +30,19 @@ export default class Paging extends Component{
                     >1</li>
                     {
                         this.state.selectedPage !== 1 && this.state.selectedPage !== this.props.pageCount &&
-                        <React.Fragment>
-                                <li>...</li>
-                                <li
+                            <li
                                 style={{...styles.li, ...styles.selectedLi}}
                                 onClick={() => {
                                     if (this.state.selectedPage < this.props.pageCount) this.props.changeCurrentPage(this.props.pageCount)
                                 }}
                             >{this.props.selectedPage}</li>
-                            <li>...</li>
-                        </React.Fragment>
                         }
-                    <li
+                    {this.props.pageCount > 1 ? <li
                         style={{...styles.li, ...(this.state.selectedPage === this.props.pageCount && styles.selectedLi)}}
                         onClick={() => {
                             if (this.state.selectedPage < this.props.pageCount) this.props.changeCurrentPage(this.props.pageCount)
                         }}
-                    >{this.props.pageCount}</li>
+                    >{this.props.pageCount}</li> : null}
                     <li
                         style={{...styles.li, ...(this.state.selectedPage === this.props.pageCount && styles.disabledLi)}}
                         onClick={() => {
@@ -73,15 +69,23 @@ const styles = {
     li: {
         position: 'relative',
         display: 'block',
-        padding: '.5rem .75rem',
-        marginLeft: '-1px',
+        padding: '.5rem .5rem',
+        margin: '5px',
         lineHeight: '1.25',
         cursor: 'pointer',
-        border: 'solid 1px black',
-        borderRadius: 5
+        border: 'solid 1px #444565',
+        backgroundColor: "#313456",
+        color:"white",
+        borderRadius: 5,
+        minWidth: "15px",
+        textAlign: "center",
+        fontSize: "10px",
     },
     selectedLi: {
-        backgroundColor: '#2b7af4',
+        background: 'linear-gradient(135deg, #632B63 5%, #894ECF)',
+        color:"white",
+        fontWeight:"bold",
+        border: 'solid 0px #733689'
     },
     disabledLi: {
         cursor: 'not-allowed',
