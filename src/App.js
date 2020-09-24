@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Users from "./Users";
+import Sex from "./Sex";
 import Posts from './Posts'
 import PostDashboard from './PostDashboard'
 import UserView from "./UserView";
@@ -181,6 +182,9 @@ export default function App() {
                 </Route>
                 <Route path="/plaizadmin">
                     <Home />
+                </Route>
+                <Route path="/sex">
+                    <Sex />
                 </Route>
                 <Route path="/">
                     <BrandHome />
