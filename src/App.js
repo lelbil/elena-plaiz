@@ -19,6 +19,8 @@ import Peclers from './assets/Peclers.png';
 import Promostyl from './assets/Promostyl.png';
 import Launchmetrics from './assets/Launchmetrics.png';
 
+import Tags from './components/Tags';
+import { get, getUri } from './services/api';
 
 const getQueryParamsFromFilters = filters => {
     let str = ''
@@ -48,22 +50,15 @@ function Home() {
         fetchPosts()
     }, [ perPage, currentPage, filters, searchQuery ])
 
-    const fetchPosts = () => {
-        fetch(`http://35.181.29.44:9000/api/posts/elena?searchquery=${search}&page=${currentPage}&perPage=${perPage}${getQueryParamsFromFilters(filters)}`, {
-            method: 'GET',
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJQbGFpeiIsInN1YiI6IjVjZmU0YzA2ZGU2OGJhNjg4MjY0NzVkMSIsImlhdCI6MTU5Mzg3MDIyNzUzMSwiZXhwIjoxNTkzOTU2NjI3NTMxfQ.T9I87aqed0Oy5ckgba0veV3NLnZeUzPpGAli_hqZW9k'
-            }
-        }).then(res => res.json()).then(result => {
-            setData(result.docs)
-            setCurrentPage(result.page)
-            setPageCount(result.totalPages)
-        })
-        .catch(error => {
-            console.warn('There was an error while trying to get posts: ', error)
-        })
+    const fetchPosts = async () => {
+      const result = await get(`/api/posts/elena?searchquery=${search}&page=${currentPage}&perPage=${perPage}${getQueryParamsFromFilters(filters)}`);
+      if (result.data) {
+        setData(result.data.docs)
+        setCurrentPage(result.data.page)
+        setPageCount(result.data.totalPages)
+      } else {
+        console.warn('There was an error while trying to get posts: ', result.err)
+      }
     }
     const changePerPage = event => {
         setPerPage(parseInt(event.target.value))
@@ -105,22 +100,15 @@ function BrandHome() {
         fetchPosts()
     }, [ currentPage, searchQuery ])
 
-    const fetchPosts = () => {
-        fetch(`http://35.181.29.44:9000/api/posts/elena?searchquery=${search}&page=${currentPage}&perPage=100&shadowban=false&shadowbanF=true&moodboard=false&moodboardF=true`, {
-            method: 'GET',
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJQbGFpeiIsInN1YiI6IjVjZmU0YzA2ZGU2OGJhNjg4MjY0NzVkMSIsImlhdCI6MTU5Mzg3MDIyNzUzMSwiZXhwIjoxNTkzOTU2NjI3NTMxfQ.T9I87aqed0Oy5ckgba0veV3NLnZeUzPpGAli_hqZW9k'
-            }
-        }).then(res => res.json()).then(result => {
-            setData(result.docs)
-            setCurrentPage(result.page)
-            setPageCount(result.totalPages)
-        })
-        .catch(error => {
-            console.warn('There was an error while trying to get posts: ', error)
-        })
+    const fetchPosts = async () => {
+      const result = await get(`/api/posts/elena?searchquery=${search}&page=${currentPage}&perPage=100&shadowban=false&shadowbanF=true&moodboard=false&moodboardF=true`);
+      if (result.data) {
+          setData(result.data.docs)
+          setCurrentPage(result.data.page)
+          setPageCount(result.data.totalPages)
+      } else {
+          console.warn('There was an error while trying to get posts: ', result.err)
+      }
     }
 
     const onSearchChanged = ev => {
@@ -145,12 +133,14 @@ function BrandHome() {
             </div>
             <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around'}}>
                 {
-                    data.map((post, index) => <Card onClick={() => setSliderIndex(index)} key={post.id || post._id} style={{width: 300, margin: 20,flexBasis: '20%', cursor:"pointer", backgroundColor:"transparent", backgroundImage: "url(https://i.ibb.co/PQdcWpc/lock4.png)"}} elevation={24}>
+                    data.map((post, index) => <Card onClick={() => setSliderIndex(index)} key={post.id || post._id} style={{width: 300, margin: 20,flexBasis: '20%', cursor:"pointer", backgroundColor:"transparent", backgroundImage: "url(https://i.ibb.co/PQdcWpc/lock4.png)", backgroundRepeat: 'no-repeat' }} elevation={24}>
                         <CardMedia
-                            image={'http://35.181.29.44:9000/images/' + post.picture}
+                            image={`${getUri()}/images/${post.picture}`}
                             title={post.description}
-                            style={{ height: 400, backgroundColor:"transparent" }}
-                        />
+                            style={{ height: 400, backgroundColor:"transparent", display: 'flex', alignItems: 'flex-end' }}
+                        >
+                          <Tags id={post.id || post._id} data={post.labels || []}/>
+                        </CardMedia>
                     </Card>)
                 }
             </div>
