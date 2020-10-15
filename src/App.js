@@ -101,7 +101,7 @@ function BrandHome() {
     }, [ currentPage, searchQuery ])
 
     const fetchPosts = async () => {
-      const result = await get(`/api/posts/elena?searchquery=${search}&page=${currentPage}&perPage=100&shadowban=false&shadowbanF=true&moodboard=false&moodboardF=true`);
+      const result = await get(`/api/posts/elena?searchquery=${search}&page=${currentPage}&perPage=100&shadowban=false&shadowbanF=true&moodboard=false&moodboardF=true&staffPick=${search === 'staffpick'}`);
       if (result.data) {
           setData(result.data.docs)
           setCurrentPage(result.data.page)
