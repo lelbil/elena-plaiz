@@ -19,6 +19,7 @@ import Promostyl from './assets/Promostyl.png';
 import Launchmetrics from './assets/Launchmetrics.png';
 import LeherpeurParis from './assets/LeherpeurParis.png';
 import Pimkie from './assets/Pimkie.png';
+import Chloé from './assets/chloé-logo.png';
 
 
 const getQueryParamsFromFilters = filters => {
@@ -139,7 +140,7 @@ function BrandHome() {
                 <p className="X">x</p>
                 {/* <img src={LeherpeurParis} alt="LogoDcm" className="LogoDcm"/> */}
                 {/* <img src={LeherpeurParis} alt="LogoDcm" className="LogoDcm" style={{width:230, height:30, paddingTop:5}}/> */}
-                <img src={Pimkie} alt="LogoDcm" className="LogoDcm" style={{width:150, height:100}}/>
+                <img src={Chloé} alt="LogoDcm" className="LogoDcm" style={{width:90, height:90, marginLeft:-5}}/>
             </div>
             <div style={{display: 'flex', flexDirection: 'row', justifyContent: "space-between"}}>
                 <SearchBar label={'Search'} value={search} onChange={onSearchChanged}/>
