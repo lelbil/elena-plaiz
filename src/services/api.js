@@ -60,9 +60,30 @@ const put = async (path, body={}) => {
   }
 }
 
+// delete is a reserved keyword
+const _delete = async (path, body={}) => {
+  try {
+    const result = await fetch(`${uri}${path}`, {
+      method: 'DELETE',
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': jwt,
+      },
+      body: JSON.stringify(body),
+    });
+    const data = await result.json();
+    return { data };
+  } catch (err) {
+    console.log(`Error posting ${path}`, err);
+    return { err };
+  }
+}
+
 export {
   getUri,
   get,
   post,
   put,
+  _delete,
 }
