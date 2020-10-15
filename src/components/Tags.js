@@ -20,7 +20,6 @@ export default ({ id, data }) => {
   }
 
   const deleteTag = async (tag) => {
-    console.log('tag to delete', tag)
     setTags(tags.filter(t => t !== tag));
     try {
       await _delete(`/api/posts/elena/${id}/labels/${tag}`);
@@ -34,7 +33,7 @@ export default ({ id, data }) => {
       {tags.map(d =>
         (<div key={d} style={styles.tagDiv}>
           <p style={styles.tagText}>{d}</p>
-          <ClearIcon className='pointerHover' style={{ backgroundColor: '#dddddd', fontSize: '0.8em', marginLeft: '5px', borderRadius: '10px' }} onClick={() => deleteTag(d)}/>
+          <ClearIcon className='pointerHover' style={{ backgroundColor: '#dddddd', fontSize: '0.8em', marginLeft: '5px', borderRadius: '10px' }} onClick={(e) => { e.stopPropagation(); deleteTag(d) }}/>
         </div>)
       )}
     </div>

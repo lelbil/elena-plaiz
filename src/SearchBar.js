@@ -4,6 +4,7 @@ import {
   makeStyles,
 } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import SearchIcon from '@material-ui/icons/Search';
 
 const CssTextField = withStyles({
     root: {
@@ -21,7 +22,7 @@ const CssTextField = withStyles({
         },
     },
 })(TextField);
-  
+
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -35,11 +36,12 @@ const useStyles = makeStyles((theme) => ({
         color:'#535274',
     }
 }));
-  
+
 export default function SearchBar(props) {
     const classes = useStyles();
-  
+
     return (
+      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', position: 'relative' }}>
         <CssTextField
             id="custom-css-standard-input"
             label={props.label || "Search"}
@@ -48,5 +50,7 @@ export default function SearchBar(props) {
             InputProps={{className:classes.input}}
             InputLabelProps={{className:classes.inputLabel}}
         />
+        <SearchIcon className='pointerHover' style={{ color: '#ffffff90', position: 'absolute', right: '10px', fontSize: '1.5em' }}/>
+      </div>
     );
   }

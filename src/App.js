@@ -132,6 +132,7 @@ function BrandHome() {
                 <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>
             </div>
             <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around'}}>
+                {data.length === 0 && <p style={{ color: 'white', fontSize: '1.5em', fontWeight: 'bold' }}>Aucun résultat</p>}
                 {
                     data.map((post, index) => <Card onClick={() => setSliderIndex(index)} key={post.id || post._id} style={{width: 300, margin: 20,flexBasis: '20%', cursor:"pointer", backgroundColor:"transparent", backgroundImage: "url(https://i.ibb.co/PQdcWpc/lock4.png)", backgroundRepeat: 'no-repeat' }} elevation={24}>
                         <CardMedia
@@ -152,7 +153,7 @@ function BrandHome() {
                 onMovePrevRequest={() => setSliderIndex((sliderIndex - 1) % images.length )}
                 onMoveNextRequest={() => setSliderIndex((sliderIndex + 1) % images.length )}
             />}
-            <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>
+            {data.length > 0 && <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>}
         </div>
     );
 }
