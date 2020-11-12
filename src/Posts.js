@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
-import { Card, CardMedia } from '@material-ui/core'
+import { Card, CardMedia, CardActions, Button } from '@material-ui/core'
+import VisibilityOffTwoToneIcon from '@material-ui/icons/VisibilityOffTwoTone';
+import ChildFriendlyIcon from '@material-ui/icons/ChildFriendly';
+import BrushIcon from '@material-ui/icons/Brush';
 
 class Posts extends Component {
     constructor(props) {
@@ -23,15 +26,22 @@ class Posts extends Component {
         return (
             <div style={styles.container}>
                 {
-                    this.state.data.map(post => <Link to={'/post/' + post.id || post._id}>
-                        <Card key={post.id || post._id} style={styles.card} elevation={24}>
-                            <CardMedia
-                                image={'http://35.181.29.44:9000/images/' + post.picture}
-                                title={post.description}
-                                style={styles.media}
-                            />
-                        </Card>
-                    </Link>)
+                    this.state.data.map(post => <Card key={post.id || post._id} style={styles.card} elevation={24}>
+                            <Link to={'/post/' + post.id || post._id}>
+                                <CardMedia
+                                    image={'http://35.181.29.44:9000/images/' + post.picture}
+                                    title={post.description}
+                                    style={styles.media}
+                                >
+                                    {post.isShadowban && <VisibilityOffTwoToneIcon fontSize={'large'} color={'error'}/>}
+                                    {post.isJuvenile && <ChildFriendlyIcon fontSize={'large'} color={'error'}/>}
+                                    {post.isMoodboard && <BrushIcon fontSize={'large'} color={'error'}/>}
+                                </CardMedia>
+                            </Link>
+                            <CardActions>
+                                {!post.isShadowban && <Button color={'secondary'} onClick={() => this.props.shadowban(post.id || post._id)}>Shadowban</Button>}
+                            </CardActions>
+                        </Card>)
                 }
             </div>
         );
@@ -51,6 +61,7 @@ const styles = {
     },
     media: {
         height: 400,
+        display: 'flex',
     },
 }
 

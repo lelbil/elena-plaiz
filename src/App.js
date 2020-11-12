@@ -20,7 +20,8 @@ import Promostyl from './assets/Promostyl.png';
 import Launchmetrics from './assets/Launchmetrics.png';
 
 import Tags from './components/Tags';
-import { get, getUri } from './services/api';
+import { get, put, getUri } from './services/api';
+import * as _ from "lodash";
 
 const getQueryParamsFromFilters = filters => {
     let str = ''
@@ -72,13 +73,25 @@ function Home() {
         setSearch(value)
     }
 
+    const shadowban = async (postId) => {
+        const newPost = await put(`/api/posts/${postId}/shadowban`)
+
+        const newStateData = [...data]
+        const indexOfShadowbanned = _.findIndex(newStateData, {
+            id: postId
+        })
+        newStateData[indexOfShadowbanned] = { ...newStateData[indexOfShadowbanned], isShadowban: true }
+
+        setData(newStateData)
+    }
+
     return (
         <div className="App">
             <Filtering perPage={perPage} changePerPage={changePerPage} changeFilters={setFilters}/>
             <Link to={"/users"}><h3>Users View</h3></Link>
             <TextField label={'Search in description'} value={search} onChange={onSearchChanged}/>
             <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage} className="Paging"/>
-            <Posts data={data}/>
+            <Posts data={data} shadowban={shadowban}/>
             <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>
         </div>
     );
