@@ -9,7 +9,7 @@ import UserView from "./UserView";
 import Paging from './Paging'
 import Filtering from './Filtering'
 import SearchBar from './SearchBar'
-import {Card, CardMedia, TextField} from "@material-ui/core"
+import {Card, CardMedia, TextField, Switch as MSwitch} from "@material-ui/core"
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import logo from './assets/logo-test.png';
@@ -91,6 +91,7 @@ function BrandHome() {
     const [data, setData] = useState([])
     const [pageCount, setPageCount] = useState(1)
     const [sliderIndex, setSliderIndex] = useState(null)
+    const [admin, setAdmin] = useState(false)
 
     useEffect(() => {
         fetchPosts()
@@ -123,12 +124,18 @@ function BrandHome() {
         <div className="App">
             <div className="LogosHeader">
                 <img src={logo} alt="Logo" className="Logo"/>
-                <p className="X">x</p>
-                <img src={logoDcm} alt="LogoDcm" className="LogoDcm"/>
+                {/*<p className="X">x</p>
+                <img src={Promostyl} alt="LogoDcm" className="LogoDcm"/>*/}
                 {/* <img src={Launchmetrics} alt="LogoDcm" className="LogoDcm" style={{width:150, height:89, paddingTop:15}}/> */}
             </div>
-            <div style={{display: 'flex', flexDirection: 'row', justifyContent: "space-between"}}>
+            <div style={{display: 'flex', flexDirection: 'row', justifyContent: "space-between", alignItems: 'center'}}>
                 <SearchBar label={'Search'} value={search} onChange={onSearchChanged}/>
+                <MSwitch
+                    checked={admin}
+                    onChange={(e) => setAdmin(e.target.checked)}
+                    name="admin"
+                    style={{ color: '#632B63' }}
+                />
                 <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>
             </div>
             <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around'}}>
@@ -140,7 +147,7 @@ function BrandHome() {
                             title={post.description}
                             style={{ height: 400, backgroundColor:"transparent", display: 'flex', alignItems: 'flex-end' }}
                         >
-                          <Tags id={post.id || post._id} data={post.labels || []}/>
+                          {admin && <Tags id={post.id || post._id} data={post.labels || []}/>}
                         </CardMedia>
                     </Card>)
                 }
