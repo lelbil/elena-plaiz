@@ -55,9 +55,9 @@ const styles = {
         justifyContent: 'space-around',
     },
     card: {
-        width: 300,
-        margin: 20,
-        flexBasis: '20%'
+        width: 250,
+        margin: 5,
+        // flexBasis: '20%'
     },
     media: {
         height: 400,
