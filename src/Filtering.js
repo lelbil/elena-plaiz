@@ -36,23 +36,29 @@ export default class Filtering extends Component {
         return (
             <div style={styles.container}>
                 <FormControl component="fieldset" row style={styles.group}>
-                    <RadioGroup row
-                                aria-label="Number of items per page"
-                                name="perPage"
-                                value={this.state.perPage}
-                                onChange={this.props.changePerPage}
-                    >
-                        <FormLabel style={styles.filterLabel} component="legend">Items per page: </FormLabel>
-                        <FormControlLabel value={20} control={<Radio />} label="20" />
-                        <FormControlLabel value={50} control={<Radio />} label="50" />
-                        <FormControlLabel value={100} control={<Radio />} label="100" />
-                    </RadioGroup>
-                    <FormControlLabel control={<Checkbox onChange={this.onChange} checked={this.state.shadowban} name={'shadowban'}/>} label="Shadowbanned" />
-                    <FormControlLabel control={<Checkbox onChange={this.onChange} checked={this.state.shadowbanF} name={'shadowbanF'}/>} label="Not shadowbanned" />
-                    <FormControlLabel control={<Checkbox onChange={this.onChange} checked={this.state.juvenile} name={'juvenile'}/>} label="Juvenile" />
-                    <FormControlLabel control={<Checkbox onChange={this.onChange} checked={this.state.juvenileF} name={'juvenileF'}/>} label="Not Juvenile" />
-                    <FormControlLabel control={<Checkbox onChange={this.onChange} checked={this.state.moodboardF} name={'moodboardF'}/>} label="Not Moodboard" />
-                    <FormControlLabel control={<Checkbox onChange={this.onChange} checked={this.state.moodboard} name={'moodboard'}/>} label="Moodboard" />
+                    <div style={{flexDirection:"row"}}>
+                        <RadioGroup
+                            row
+                            aria-label="Number of items per page"
+                            name="perPage"
+                            value={this.state.perPage}
+                            onChange={this.props.changePerPage}
+                            style={{ margin:10}}
+                        >
+                            <FormLabel style={styles.filterLabel} component="legend">Items per page: </FormLabel>
+                            <FormControlLabel value={20} control={<Radio />} label="20" />
+                            <FormControlLabel value={50} control={<Radio />} label="50" />
+                            <FormControlLabel value={100} control={<Radio />} label="100" />
+                        </RadioGroup>
+                    </div>
+                    <div style={{flexDirection:"row", textAlign:"left", margin:10}}>
+                        <FormControlLabel control={<Checkbox onChange={this.onChange} checked={this.state.shadowbanF} name={'shadowbanF'}/>} label="Visible" />
+                        <FormControlLabel control={<Checkbox onChange={this.onChange} checked={this.state.shadowban} name={'shadowban'}/>} label="Shadowbanned" />
+                        <FormControlLabel control={<Checkbox onChange={this.onChange} checked={this.state.juvenile} name={'juvenile'}/>} label="Juvenile" />
+                        <FormControlLabel control={<Checkbox onChange={this.onChange} checked={this.state.juvenileF} name={'juvenileF'}/>} label="Adults" />
+                        <FormControlLabel control={<Checkbox onChange={this.onChange} checked={this.state.moodboardF} name={'moodboardF'}/>} label="Photos" />
+                        <FormControlLabel control={<Checkbox onChange={this.onChange} checked={this.state.moodboard} name={'moodboard'}/>} label="Moodboard" />
+                    </div>
                 </FormControl>
 
             </div>

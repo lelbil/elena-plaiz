@@ -62,3 +62,10 @@
 .pointerHover:hover {
   cursor: pointer;
 }
+
+a {
+  color: #7D4ECE;
+}
+a:visited {
+  color: #7D4ECE;
+}

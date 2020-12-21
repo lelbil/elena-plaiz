@@ -55,11 +55,13 @@ class PostDashboard extends Component {
         const { user, post } = this.state
         const originalQualityLink = 'https://plaizoriginal.s3.eu-west-3.amazonaws.com/' + (post && post.picture)
         return (
-            <div>
+            <div style={{margin:10}}>
                 {!post ? <span>Loading...</span> :
                     <div style={styles.container}>
                         <div>
                             <Link to={"/plaizadmin"}><button>Home</button></Link>
+                        </div>
+                        <div style={{marginLeft:10}}>
                             <img
                                 style={styles.picture}
                                 src={'http://35.181.29.44:9000/images/' + post.picture}
@@ -73,17 +75,17 @@ class PostDashboard extends Component {
                             </div>*/}
                         </div>
                         <div style={styles.actions}>
-                            <div>
+                            <div style={{...styles.userInfoText, margin:10}}>
                                 Here we're going to put info about the post
                                 <ul>
-                                    <li>Superlikes : {post.user_superlike.length}</li>
-                                    <li>Likes : {post.user_like.length}</li>
-                                    <li>Dislikes : {post.user_dislike.length}</li>
-                                    <li>Number of Comments : {post.comments.length}</li>
-                                    <li>isMoodboard : {post.isMoodboard.toString()}</li>
-                                    <li>isShadowban : {post.isShadowban.toString()}</li>
-                                    <li>isJuvenile : {post.isJuvenile.toString()}</li>
-                                    <li>Description : {post.description}</li>
+                                    <li  style={styles.userInfoText}>Superlikes : {post.user_superlike.length}</li>
+                                    <li  style={styles.userInfoText}>Likes : {post.user_like.length}</li>
+                                    <li  style={styles.userInfoText}>Dislikes : {post.user_dislike.length}</li>
+                                    <li  style={styles.userInfoText}>Number of Comments : {post.comments.length}</li>
+                                    <li  style={styles.userInfoText}>isMoodboard : {post.isMoodboard.toString()}</li>
+                                    <li  style={styles.userInfoText}>isShadowban : {post.isShadowban.toString()}</li>
+                                    <li  style={styles.userInfoText}>isJuvenile : {post.isJuvenile.toString()}</li>
+                                    <li  style={styles.userInfoText}>Description : {post.description}</li>
                                 </ul>
 
                             </div>
@@ -99,14 +101,14 @@ class PostDashboard extends Component {
                                 <img src={user.profile_pic} style={{height: 250}}/></Link>
                                 <ul>
                                     {['id', 'fb_id', 'expoPushToken', 'username', 'name', 'bio', 'email', 'tel', 'register_date', 'yearOfBirth', 'origin'].map(info => (
-                                        <li key={info}>{info} : {user[info]}</li>
+                                        <li key={info} style={styles.userInfoText}>{info} : {user[info]}</li>
                                     ))}
-                                    <li>City: {user.meta && user.meta.city}</li>
-                                    <li>Country: {user.meta && user.meta.country}</li>
-                                    <li>Fav Cats: {user.fav_cat.join(', ')}</li>
-                                    <li>Number of Fav posts: {user.fav_posts.length}</li>
-                                    <li>Number of Fav Users: {user.fav_users.length}</li>
-                                    <li>Number of Users in squad: {user.squad.length}</li>
+                                    <li  style={styles.userInfoText}>City: {user.meta && user.meta.city}</li>
+                                    <li  style={styles.userInfoText}>Country: {user.meta && user.meta.country}</li>
+                                    <li  style={styles.userInfoText}>Fav Cats: {user.fav_cat.join(', ')}</li>
+                                    <li  style={styles.userInfoText}>Number of Fav posts: {user.fav_posts.length}</li>
+                                    <li  style={styles.userInfoText}>Number of Fav Users: {user.fav_users.length}</li>
+                                    <li  style={styles.userInfoText}>Number of Users in squad: {user.squad.length}</li>
                                 </ul>
                                 <div>
 
@@ -137,6 +139,8 @@ const styles = {
     },
     picture: {
         height: '80vh',
-        width: '100vh',
     },
+    userInfoText: {
+        color:"white"
+    }
 }

@@ -71,29 +71,29 @@ class UserView extends Component {
             <div>
                 {!user ? <span>Loading...</span> :
                     <div style={styles.container}>
-                        <Link to={"/plaizadmin"}><button>Home</button></Link>
-                        <Link to={"/users"}><button>Users</button></Link>
+                        <Link style={{margin:10}} to={"/plaizadmin"}><button>Home</button></Link>
+                        <Link style={{margin:10}} to={"/users"}><button>Users</button></Link>
                         { !!posts && <div style={{ flexDirection: 'row' }}>
                             <RadioGroup row aria-label="Show" name="mode" value={this.state.showPostsMode} onChange={this.changeMode}>
-                                <FormLabel component="legend">Show: </FormLabel>
-                                { showPostsModes.map(mode => <FormControlLabel value={mode} control={<Radio />} label={mode} />) }
+                                <FormLabel component="legend" style={{color:"white", alignSelf:"center", marginRight:10, marginLeft:10}}>Show: </FormLabel>
+                                { showPostsModes.map(mode => <FormControlLabel style={{color:"white"}} value={mode} control={<Radio />} label={mode} />) }
                             </RadioGroup>
                             <Posts data={postsToShow}/>
                         </div>}
                         <div style={styles.userInfo}>
                             <div>
-                                <h1>{ user.username || user.name }</h1>
+                                <h1 style={{color:"white"}}>{ user.username || user.name }</h1>
                                 <img src={user.profile_pic} style={{height: 250}}/>
                                 <ul>
                                     {['id', 'fb_id', 'expoPushToken', 'username', 'name', 'bio', 'email', 'tel', 'register_date', 'yearOfBirth', 'origin'].map(info => (
-                                        <li key={info}>{info} : {user[info]}</li>
+                                        <li style={styles.userInfoText} key={info}>{info} : {user[info]}</li>
                                     ))}
-                                    <li>City: {user.meta && user.meta.city}</li>
-                                    <li>Country: {user.meta && user.meta.country}</li>
-                                    <li>Fav Cats: {user.fav_cat.join(', ')}</li>
-                                    <li>Number of Fav posts: {user.fav_posts.length}</li>
-                                    <li>Number of Fav Users: {user.fav_users.length}</li>
-                                    <li>Number of Users in squad: {user.squad.length}</li>
+                                    <li style={styles.userInfoText}>City: {user.meta && user.meta.city}</li>
+                                    <li style={styles.userInfoText}>Country: {user.meta && user.meta.country}</li>
+                                    <li style={styles.userInfoText}>Fav Cats: {user.fav_cat.join(', ')}</li>
+                                    <li style={styles.userInfoText}>Number of Fav posts: {user.fav_posts.length}</li>
+                                    <li style={styles.userInfoText}>Number of Fav Users: {user.fav_users.length}</li>
+                                    <li style={styles.userInfoText}>Number of Users in squad: {user.squad.length}</li>
                                 </ul>
                                 <div>
 
@@ -113,6 +113,7 @@ export default withRouter(UserView)
 const styles = {
     container: {
         display: 'flex',
+        margin:10
     },
     actions: {
         display: 'flex',
@@ -126,4 +127,7 @@ const styles = {
         height: '80vh',
         width: '100vh',
     },
+    userInfoText: {
+        color:"white"
+    }
 }

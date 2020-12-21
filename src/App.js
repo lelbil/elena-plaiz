@@ -89,7 +89,7 @@ function Home() {
         <div className="App">
             <Filtering perPage={perPage} changePerPage={changePerPage} changeFilters={setFilters}/>
             <Link to={"/users"}><h3>Users View</h3></Link>
-            <TextField label={'Search in description'} value={search} onChange={onSearchChanged}/>
+            <SearchBar label={'Search in description'} value={search} onChange={onSearchChanged}/>
             <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage} className="Paging"/>
             <Posts data={data} shadowban={shadowban}/>
             <Paging changeCurrentPage={setCurrentPage} pageCount={pageCount} selectedPage={currentPage}/>

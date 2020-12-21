@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 import {Card, CardMedia, CardHeader, TextField} from '@material-ui/core'
+import SearchBar from './SearchBar'
 
 class Users extends Component {
     constructor(props) {
@@ -44,8 +45,8 @@ class Users extends Component {
     render() {
         return (
             <div style={styles.bigContainer}>
-                <Link to={"/plaizadmin"}><button>Home</button></Link>
-                <TextField label={'Search'} value={this.state.searchQuery} onChange={this.onSearchChanged}/>
+                <Link to={"/plaizadmin"} style={{margin:10}}><button>Home</button></Link>
+                <SearchBar label={'Search'} value={this.state.searchQuery} onChange={this.onSearchChanged}/>
                 <div style={styles.container}>
                     {
                         this.state.users.map(user => <Link to={'/user/' + user.fb_id}>
