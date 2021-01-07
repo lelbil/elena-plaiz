@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Users from "./Users";
+import Chats from "./Chats";
 import Sex from "./Sex";
 import Posts from './Posts'
 import PostDashboard from './PostDashboard'
@@ -190,6 +191,12 @@ export default function App() {
                 </Route>
                 <Route path="/post/:postId">
                     <PostDashboard />
+                </Route>
+                <Route path="/plaizadmin/chats/:chatId">
+                    <Chats />
+                </Route>
+                <Route path="/plaizadmin/chats">
+                    <Chats />
                 </Route>
                 <Route path="/plaizadmin">
                     <Home />
