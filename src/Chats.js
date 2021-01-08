@@ -59,7 +59,7 @@ class Chats extends Component {
         return (
             <div style={styles.bigContainer}>
                 <div style={{ display: 'flex' }}>
-                    <div style={{ height: '100vh', overflow: 'scroll' }}>
+                    <div style={{ height: '100vh', overflow: 'scroll', paddingTop:16 }}>
                         {_.orderBy(chats, 'messages[0].createdAt', 'desc').map(chat => {
                             //_.orderBy(chats, 'messages.length', 'desc').map(chat => {
                             const particpant1 = _.get(chat, 'userContent[0]', {})
@@ -69,20 +69,22 @@ class Chats extends Component {
                             const numberOfMessages = chat.messages.length
 
                             return (<div key={chat._id} onClick={() => this.goToChat(chat)} style={{
-                                border: '1px pink solid',
+                                border: '1px rgb(68, 69, 101) solid',
+                                borderRadius: '10px',
+                                marginBottom: '5px',
                                 padding: '5px',
                                 width: '33vw',
                                 display: 'flex',
                                 justifyContent: 'space-around',
-                                backgroundColor: selectedConvo && chat._id === selectedConvo._id ? 'pink' : undefined,
+                                backgroundColor: selectedConvo && chat._id === selectedConvo._id ? 'rgb(49, 52, 86)' : undefined,
                             }}>
-                                <img src={particpant1.profile_pic} style={{ width: '75px', height: '75px', borderRadius: '50%' }}/>
+                                <img src={particpant1.profile_pic} style={{ width: '50px', height: '50px', borderRadius: '50%' }}/>
                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                    <h4 style={{ marginBottom: 0 }}>{ `${name1}    <->    ${name2}` }</h4>
+                                    <h4 style={{ marginBottom: 0, marginTop: 0}}>{ `${name1}    <->    ${name2}` }</h4>
                                     <br/>
-                                    <h5 style={{ marginTop: 0 }}>{ `${numberOfMessages} messages` }</h5>
+                                    <h5 style={{ margin: 0 }}>{ `${numberOfMessages} messages` }</h5>
                                 </div>
-                                <img src={particpant2.profile_pic} style={{ width: '75px', height: '75px', borderRadius: '50%' }}/>
+                                <img src={particpant2.profile_pic} style={{ width: '50px', height: '50px', borderRadius: '50%' }}/>
                             </div>)
                         })
                         }
@@ -94,17 +96,20 @@ class Chats extends Component {
                                 const senderName = senderContent.username || senderContent.name
 
                                 return (<div key={message._id} style={{
-                                    border: '1px pink solid',
+                                    border: '1px rgb(68, 69, 101) solid',
+                                    borderRadius: '10px',
+                                    marginBottom: '5px',
                                     padding: '5px',
                                     width: '62vw',
                                     display: 'flex',
                                     justifyContent: 'space-around',
+                                    alignItems: "center"
                                 }}>
                                     <Link to={"/user/" + senderContent.fb_id}>
-                                        <img src={senderContent.profile_pic} style={{ width: '75px', height: '75px', borderRadius: '50%' }}/>
+                                        <img src={senderContent.profile_pic} style={{ width: '50px', height: '50px', borderRadius: '50%' }}/>
                                     </Link>
                                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                        <h3 style={{ marginBottom: 0 }}>{ senderName }</h3>
+                                        <h3 style={{ marginBottom: 0, marginTop: 0 }}>{ senderName }</h3>
                                         <br/>
                                         <h5 style={{ marginTop: 0, marginBottom: 0 }}>{ message.text }</h5>
                                         <br/>
