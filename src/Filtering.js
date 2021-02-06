@@ -20,7 +20,23 @@ export default class Filtering extends Component {
     }
 
     onChange = ev => {
-        this.setState({ ...this.state, [ev.target.name]: ev.target.checked}, () => {
+        const newStateProp = {}
+        let gender = null
+
+        if (ev.target.name === 'female' || ev.target.name === 'male') {
+            newStateProp.gender = ev.target.checked ? ev.target.name : null
+            if (ev.target.checked) {
+                newStateProp.gender = ev.target.name
+                gender = ev.target.name
+            } else {
+                newStateProp.gender = null
+                gender = null
+            }
+        } else {
+            newStateProp[ev.target.name] = ev.target.checked
+        }
+        // if (this.state.gender === 'male' || this.state.gender === 'female') gender = this.state.gender
+        this.setState({ ...this.state, ...newStateProp}, () => {
             this.props.changeFilters({
                 shadowban: this.state.shadowban,
                 shadowbanF: this.state.shadowbanF,
@@ -28,6 +44,7 @@ export default class Filtering extends Component {
                 juvenileF: this.state.juvenileF,
                 moodboard: this.state.moodboard,
                 moodboardF: this.state.moodboardF,
+                ...(gender && { gender })
             })
         })
     }
@@ -58,6 +75,8 @@ export default class Filtering extends Component {
                         <FormControlLabel control={<Checkbox onChange={this.onChange} checked={this.state.juvenileF} name={'juvenileF'}/>} label="Adults" />
                         <FormControlLabel control={<Checkbox onChange={this.onChange} checked={this.state.moodboardF} name={'moodboardF'}/>} label="Photos" />
                         <FormControlLabel control={<Checkbox onChange={this.onChange} checked={this.state.moodboard} name={'moodboard'}/>} label="Moodboard" />
+                        <FormControlLabel control={<Checkbox onChange={this.onChange} checked={this.state.gender === 'male'} name={'male'}/>} label="male" />
+                        <FormControlLabel control={<Checkbox onChange={this.onChange} checked={this.state.gender === 'female'} name={'female'}/>} label="female" />
                     </div>
                 </FormControl>
 
