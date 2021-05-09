@@ -29,6 +29,9 @@ class Posts extends Component {
                     this.state.data.map(post => <Card key={post.id || post._id} style={styles.card} elevation={24}>
                             <Link to={'/post/' + post.id || post._id}>
                                 <CardMedia
+                                    component={post.isVideo? 'video' : 'div'}
+                                    autoPlay
+                                    loop
                                     image={'http://35.181.29.44:9000/images/' + post.picture}
                                     title={post.description}
                                     style={styles.media}
