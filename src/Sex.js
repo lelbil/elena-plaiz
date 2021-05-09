@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import * as _ from 'lodash'
 import Posts from './Posts'
+import {shadowbanPost} from "./services/post";
 
 export default  class Sex extends Component {
     constructor(props) {
@@ -121,6 +122,20 @@ export default  class Sex extends Component {
         }, this.fetchCurrentUserAndPosts)
     }
 
+    shadowban = async postId => {
+        await shadowbanPost(postId)
+
+        const newStatePosts = [...this.state.posts]
+        const indexOfShadowbanned = _.findIndex(newStatePosts, {
+            id: postId
+        })
+        newStatePosts[indexOfShadowbanned] = { ...newStatePosts[indexOfShadowbanned], isShadowban: true }
+
+        this.setState({
+            posts: newStatePosts
+        })
+    }
+
     render() {
         const { user, posts } = this.state
         return (
@@ -139,7 +154,7 @@ export default  class Sex extends Component {
                         {!user ? <span>Loading...</span> :
                             <div style={styles.userContainer}>
                                 { !!posts && <div style={{ flexDirection: 'row' }}>
-                                    <Posts data={posts}/>
+                                    <Posts data={posts} shadowban={this.shadowban}/>
                                 </div>}
                                 <div style={styles.userInfo}>
                                     <div>

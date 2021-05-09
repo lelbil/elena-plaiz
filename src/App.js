@@ -23,6 +23,7 @@ import Launchmetrics from './assets/Launchmetrics.png';
 import Tags from './components/Tags';
 import { get, put, getUri } from './services/api';
 import * as _ from "lodash";
+import {shadowbanPost} from "./services/post";
 
 const getQueryParamsFromFilters = filters => {
     let str = ''
@@ -75,7 +76,7 @@ function Home() {
     }
 
     const shadowban = async (postId) => {
-        const newPost = await put(`/api/posts/${postId}/shadowban`)
+        await shadowbanPost(postId)
 
         const newStateData = [...data]
         const indexOfShadowbanned = _.findIndex(newStateData, {

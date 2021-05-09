@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import Posts from './Posts'
 import {FormControlLabel, FormLabel, Radio, RadioGroup} from "@material-ui/core";
+import {shadowbanPost} from "./services/post";
+import * as _ from "lodash";
 
 const showPostsModes = [ 'all', 'moodboard', 'notMoodboard' ]
 
@@ -61,6 +63,20 @@ class UserView extends Component {
         this.setState({ showPostsMode: ev.target.value })
     }
 
+    shadowban = async postId => {
+        await shadowbanPost(postId)
+
+        const newStatePosts = [...this.state.posts]
+        const indexOfShadowbanned = _.findIndex(newStatePosts, {
+            id: postId
+        })
+        newStatePosts[indexOfShadowbanned] = { ...newStatePosts[indexOfShadowbanned], isShadowban: true }
+
+        this.setState({
+            posts: newStatePosts
+        })
+    }
+
     render() {
         const { user, posts, showPostsMode } = this.state
         let postsToShow = posts
@@ -78,7 +94,7 @@ class UserView extends Component {
                                 <FormLabel component="legend" style={{color:"white", alignSelf:"center", marginRight:10, marginLeft:10}}>Show: </FormLabel>
                                 { showPostsModes.map(mode => <FormControlLabel style={{color:"white"}} value={mode} control={<Radio />} label={mode} />) }
                             </RadioGroup>
-                            <Posts data={postsToShow}/>
+                            <Posts data={postsToShow} shadowban={this.shadowban}/>
                         </div>}
                         <div style={styles.userInfo}>
                             <div>
