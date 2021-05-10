@@ -62,10 +62,13 @@ class PostDashboard extends Component {
                             <Link to={"/plaizadmin"}><button>Home</button></Link>
                         </div>
                         <div style={{marginLeft:10}}>
+                            {post.isVideo ? <video width="500" height="750" controls>
+                                    <source src={'http://35.181.29.44:9000/images/' + post.picture} type="video/mp4"/>
+                                </video> :
                             <img
                                 style={styles.picture}
                                 src={'http://35.181.29.44:9000/images/' + post.picture}
-                            />
+                            />}
                             <div>
                                 <a href={originalQualityLink} target={'_blank'}>{originalQualityLink}</a>
                             </div>
