@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import { withRouter, Link } from 'react-router-dom'
+import {Button} from "@material-ui/core";
+import {deletePost} from "./services/post";
 
 class PostDashboard extends Component {
     constructor(props) {
@@ -51,8 +53,16 @@ class PostDashboard extends Component {
             })
     }
 
+    deleteAPost = async () => {
+        if (window.confirm('Are you sure you want to delete this post?')) {
+            const postId = this.state.post.id
+            await deletePost(postId)
+        }
+    }
+
     render() {
         const { user, post } = this.state
+        const postDate = post && new Date(post.created_at) || new Date()
         const originalQualityLink = 'https://plaizoriginal.s3.eu-west-3.amazonaws.com/' + (post && post.picture)
         return (
             <div style={{margin:10}}>
@@ -89,7 +99,10 @@ class PostDashboard extends Component {
                                     <li  style={styles.userInfoText}>isShadowban : {post.isShadowban.toString()}</li>
                                     <li  style={styles.userInfoText}>isJuvenile : {post.isJuvenile.toString()}</li>
                                     <li  style={styles.userInfoText}>Description : {post.description}</li>
+                                    <li  style={styles.userInfoText}>Date : { postDate.toLocaleDateString() + ' at ' + postDate.toLocaleTimeString()}</li>
                                 </ul>
+
+                                <Button color={'secondary'} onClick={this.deleteAPost}>Delete</Button>
 
                             </div>
 
