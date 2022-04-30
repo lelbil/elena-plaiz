@@ -42,7 +42,12 @@ class Posts extends Component {
                                 </CardMedia>
                             </Link>
                             <CardActions>
-                                {!post.isShadowban && <Button color={'secondary'} onClick={() => this.props.shadowban(post.id || post._id)}>Shadowban</Button>}
+                                {post.isShadowban ?
+                                    <Button color={'Primary'}
+                                            onClick={() => this.props.shadowban(post.id || post._id, true)}>Unshadowban</Button> :
+                                    <Button color={'secondary'}
+                                            onClick={() => this.props.shadowban(post.id || post._id)}>Shadowban</Button>
+                                }
                             </CardActions>
                         </Card>)
                 }

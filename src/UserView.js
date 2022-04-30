@@ -63,14 +63,14 @@ class UserView extends Component {
         this.setState({ showPostsMode: ev.target.value })
     }
 
-    shadowban = async postId => {
-        await shadowbanPost(postId)
+    shadowban = async (postId, unshadowban) => {
+        await shadowbanPost(postId, unshadowban)
 
         const newStatePosts = [...this.state.posts]
         const indexOfShadowbanned = _.findIndex(newStatePosts, {
             id: postId
         })
-        newStatePosts[indexOfShadowbanned] = { ...newStatePosts[indexOfShadowbanned], isShadowban: true }
+        newStatePosts[indexOfShadowbanned] = { ...newStatePosts[indexOfShadowbanned], isShadowban: !unshadowban }
 
         this.setState({
             posts: newStatePosts
