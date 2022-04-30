@@ -75,14 +75,14 @@ function Home() {
         setSearch(value)
     }
 
-    const shadowban = async (postId) => {
-        await shadowbanPost(postId)
+    const shadowban = async (postId, unshadowban) => {
+        await shadowbanPost(postId, unshadowban)
 
         const newStateData = [...data]
         const indexOfShadowbanned = _.findIndex(newStateData, {
             id: postId
         })
-        newStateData[indexOfShadowbanned] = { ...newStateData[indexOfShadowbanned], isShadowban: true }
+        newStateData[indexOfShadowbanned] = { ...newStateData[indexOfShadowbanned], isShadowban: !unshadowban }
 
         setData(newStateData)
     }
